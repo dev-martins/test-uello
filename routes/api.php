@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ImportFreightController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::prefix('freight')->group(function () {
+    Route::get('reader', [ImportFreightController::class, 'headerCSV']);
+    Route::post('import', [ImportFreightController::class, 'store']);
 });
