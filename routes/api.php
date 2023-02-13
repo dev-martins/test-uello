@@ -20,6 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix('freight')->group(function () {
-    Route::get('reader', [ImportFreightController::class, 'headerCSV']);
     Route::post('import', [ImportFreightController::class, 'store']);
 });
