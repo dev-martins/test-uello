@@ -1,2 +1,4 @@
 *
 !.gitignore
+!csv-test
+!csv-test/*
