@@ -1,66 +1,104 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<h1 align="center">Test Ello</h1>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+   <p>
+   
+   - [Sobre](#sobre)
+   - [Preview](#preview)
+   - [Funcionalidades](#funcionalidades)
+   - [Como Usar](#como-usar)
+   </p>
+
+---
+
+<h2 align="center">Sobre</h2>
+
+Foi desenvolvido para subir arquivos CSV e gravar seus dados no banco MySQL.
+
 </p>
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<h2 align="center">Preview</h2>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+   <p align="center">
+      <img src="https://i.ibb.co/25XnGFF/image.png" width="400" alt="Preview">
+   </p>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+<h2 align="center">Funcionalidades</h2>
+   
+- Upload de arquivos CSV;
+- Extrair suas informações para salvá-las no banco MySQL por meio de filas;
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+<h2 align="center">Como Usar</h2>
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- Primeiro será necessário ter instalado:
+   - git **(clonar o projeto)**
+   - docker **(rodar o projeto)**
+   - postman **(facilitar a execução o projeto)**
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Clone esse repositorio em uma pasta:
 
-## Laravel Sponsors
+```sh
+git clone https://github.com/dev-martins/test-uello.git test
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+- Entre no diretorio:
 
-### Premium Partners
+```sh
+cd test
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+- execute o docker:
 
-## Contributing
+```sh
+docker compose up -d --build
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- rode as migrations
+```sh
+docker-compose exec -T base-ello php artisan migrate
+```
+- e após isso as seeders
+  
+```sh
+docker-compose exec -T base-ello php artisan db:seed
+```
 
-## Code of Conduct
+- agora podemos colocar as filas para rodar
+```sh
+docker-compose exec -it base-ello php artisan queue:work --queue=freight-import
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- agora no postman, podemos executar nessa [collection](https://documenter.getpostman.com/view/7646530/2s935vjzZE), passando hashs **uuid** para a aplicação
 
-## Security Vulnerabilities
+<p align="center">
+      <img src="https://i.ibb.co/q7V72qN/image.png" width="150" alt="local log">
+   </p>
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- Para garantir que a aplicação está seguindo os requerimentos passados no testo como: **PSR1, PSR12** e **Tests**
+```sh
+docker-compose exec -T base-ello vendor/bin/phpcs
+```
+deve ter esse retorno
+<p align="center">
+      <img src="https://i.ibb.co/B4Cvxj2/image.png" width="150" alt="local log">
+   </p>
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Esse projeto foi desenvolvido por **[@Claudio Martins](https://www.linkedin.com/in/criar-site-martins/)**.
+
+---
+
+Se isso te ajudou, dê uma ⭐, isso vai me ajudar também!
+😉
+
+---
+
+   <div align="center">
+
+[![Linkedin Badge](https://img.shields.io/badge/-Claudio%20Martins-292929?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/criar-site-martins/)](https://www.linkedin.com/in/criar-site-martins/)
+
+   </div>
