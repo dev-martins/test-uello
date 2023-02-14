@@ -27,7 +27,7 @@ class FreightControllerTest extends TestCase
         $client_id = 'b2707dcd-f266-3192-9207-01c594adf91f';
         $response = $this->post(
             '/api/freight/import',
-            [$client_id => new UploadedFile(base_path('storage/app/public/csv-test/test.csv'),'test.csv')],
+            [$client_id => new UploadedFile(base_path('storage/app/public/csv-test/test.csv'), 'test.csv')],
             [
                 'Content-Type'  => 'multipart/form-data',
                 'Accept'        => 'application/json',
