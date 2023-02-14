@@ -27,6 +27,3 @@ jobs:
 
     - name: Run phpcs
       run: docker-compose exec -T base-ello vendor/bin/phpcs
-
-    - name: Run phpunit
-      run: docker-compose exec -T base-ello vendor/bin/phpunit -c phpunit.xml

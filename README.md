@@ -56,16 +56,6 @@ cd test
 docker compose up -d --build
 ```
 
-- rode as migrations
-```sh
-docker-compose exec -T base-ello php artisan migrate
-```
-- e após isso as seeders
-  
-```sh
-docker-compose exec -T base-ello php artisan db:seed
-```
-
 - agora podemos colocar as filas para rodar
 ```sh
 docker-compose exec -it base-ello php artisan queue:work --queue=freight-import
